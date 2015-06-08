@@ -8,6 +8,8 @@ using namespace std;
 class CMan;
 class CWoman;
 
+
+//行为基类
 class CAction
 {
     public:
@@ -17,6 +19,8 @@ class CAction
         virtual void WomanAction(CWoman& oWomon) = 0;
 };
 
+
+//人的基类
 class CPerson
 {
     public:
@@ -25,6 +29,7 @@ class CPerson
         virtual void Accept(CAction* oAction) = 0;
 };
 
+//男人
 class CMan : public CPerson
 {
 public:
@@ -36,6 +41,7 @@ public:
     }
 };
 
+//女人
 class CWoman : public CPerson
 {
 public:
@@ -47,7 +53,7 @@ public:
     }
 };
 
-
+//成功行为
 class CSuccess : public CAction
 {
 public:
@@ -64,6 +70,8 @@ public:
     }
 };
 
+
+//失败行为
 class CFailure : public CAction
 {
 public:
@@ -80,6 +88,8 @@ public:
     }
 };
 
+
+//恋爱行为
 class CLove : public CAction
 {
 public:
@@ -96,6 +106,8 @@ public:
     }
 };
 
+
+//工作行为
 class CWork : public CAction
 {
 public:
@@ -104,15 +116,17 @@ public:
 
     virtual void ManAction(CMan& oMan)
     {
-        cout << "男人考试时，会不细心。" << endl;
+        cout << "男人工作时，会不细心。" << endl;
     }
 
     virtual void WomanAction(CWoman& oWomon)
     {
-        cout << "女人考试时，会很细心。" << endl;
+        cout << "女人工作时，会很细心。" << endl;
     }
 };
 
+
+//存储人类对象的类
 class ObjectStructure
 {
 public:
@@ -152,15 +166,18 @@ private:
 
 int main()
 {
+    //先初始化人类的几种行为
     CSuccess* oSuccess = new CSuccess;
     CFailure* oFailure = new CFailure;
     CLove* oLove = new CLove;
     CWork* oWork = new CWork;
 
+    //将人类加入人类列表中
     ObjectStructure oObject;
     oObject.Attach(new CMan);
     oObject.Attach(new CWoman);
 
+    //让不同类型的人类展示不同的行为
     oObject.Accept(oSuccess);
     oObject.Accept(oFailure);
     oObject.Accept(oLove);
